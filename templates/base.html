@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--link rel="shortcut icon" href="{{ url_for('static', filename='icons/database-love-icon.png') }}"-->
+    <title>{% block page_title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="/static/css_main.css" />
+    <link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css" />
+    <script src="/static/jquery/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/jquery-ui/jquery-ui.min.css" />
+    <script src="/static/jquery-ui/jquery-ui.min.js"></script>
+    <!--script src="/static/popper/umd/popper.min.js"></script-->
+    <script src="/static/popper.js-2.11.5/umd/popper.min.js"></script>
+
+    <!--link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap.min.css" /-->
+    <!--link rel="stylesheet" href="/static/bootstrap/dist/css/bootstrap-rtl.min.css" /-->
+    <link rel="stylesheet" href="/static/bootstrap-5.0.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/static/bootstrap-5.0.2/css/bootstrap.rtl.min.css" />
+    <!--script src="/static/bootstrap/dist/js/bootstrap.min.js"></script-->
+    <script src="/static/bootstrap-5.0.2/js/bootstrap.min.js"></script>
+    <!--script src="/static/bootstrap-5.0.2/js/bootstrap.bundle.min.js"></script-->
+
+    <!--link rel="stylesheet" href="/static/bootstrap-4-multi-dropdown-navbar/css/bootstrap-4-navbar.css"-->
+    <!--script src="/static/bootstrap-4-multi-dropdown-navbar/js/bootstrap-4-navbar.js"></script-->
+
+    <style type="text/css">
+
+        /* ============ desktop view ============ */
+        @media all and (min-width: 992px) {
+        
+            .dropdown-menu li{
+                position: relative;
+            }
+            .dropdown-menu .submenu{ 
+                display: none;
+                position: absolute;
+                left:100%; top:-7px;
+            }
+            .dropdown-menu .submenu-left{ 
+                right:100%; left:auto;
+            }
+        
+            .dropdown-menu > li:hover{ background-color: #f1f1f1 }
+            .dropdown-menu > li:hover > .submenu{
+                display: block;
+            }
+        }	
+        /* ============ desktop view .end// ============ */
+        
+        /* ============ small devices ============ */
+        @media (max-width: 991px) {
+        
+        .dropdown-menu .dropdown-menu{
+                margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
+        }
+        
+        }	
+        /* ============ small devices .end// ============ */
+        
+    </style>
+</head>
+<body dir=rtl>
+    <div class="alert alert-danger d-flex align-items-center d-none" id="IE_Alert" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+            שימו לב! דפדפן Internet Explorer אינו נתמך
+        </div>
+    </div>
+    {% block header %}{% endblock %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == 'error' %}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script>
+        var isIE = window.document.documentMode ? true : false; // this variable will hold if the current browser is IE
+        if (isIE){
+            document.getElementById("IE_Alert").classList.remove("d-none");
+        }
+    </script>
+    {% block scripts %}
+    {% endblock %}
+    
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block page_title %}HackOfir - חיפוש עובדים{% endblock %}
+{% block header %}
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <form class="d-flex">
+        <input id="txt_fname" class="form-control me-2" type="search" placeholder="שם פרטי" aria-label="fname">
+        <input id="txt_lname" class="form-control me-2" type="search" placeholder="שם משפחה" aria-label="lname">
+        <button id="btn_search" class="btn btn-outline-success" type="button">חיפוש</button>
+      </form>
+      <div class="form-check form-switch">
+          <input id="switch_jumble" class="form-check-input" type="checkbox" checked="checked" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">נתונים מוצפנים</label>
+      </div>
+    </div>
+</nav>
+{% endblock %}
+{% block content %}
+    </br>
+    <h1 style="text-align:right">תוצאות החיפוש:</h1>
+    </br>
+    <div class="table-responsive-sm">
+        <table class="table table-sm table-bordered table-hover" width="100%">
+            <thead class="thead-light">
+                <th style="text-align:center" scope="col">שם פרטי</th>
+                <th style="text-align:center" scope="col">שם משפחה</th>
+                <th style="text-align:center" scope="col">תעודת זהות</th>
+            </thead>
+            <tbody id="results_table">
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block scripts %}
+<script src="/static/scripty-searchEmployees.js"></script>
+<script>
+//add_my_databases();
+</script>
+{% endblock %}
